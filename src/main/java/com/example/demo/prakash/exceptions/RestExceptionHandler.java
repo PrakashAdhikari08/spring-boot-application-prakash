@@ -2,8 +2,11 @@ package com.example.demo.prakash.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import javax.validation.ValidationException;
 
 @ControllerAdvice
 public class RestExceptionHandler {
@@ -16,9 +19,13 @@ public class RestExceptionHandler {
 		return new ResponseEntity<ApiError>(apiError, HttpStatus.EXPECTATION_FAILED);
 	}
 
-	@ExceptionHandler(ValidationException.class)
-	public ResponseEntity<String> handleFieldValidationException(ValidationException e) {
-		return new ResponseEntity<String>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<String> handleFieldValidationException(MethodArgumentNotValidException e) {
+		String [] str =e.getMessage().split("default message");
+//		System.out.println(str[2]);
+
+
+		return new ResponseEntity<String>(e.getLocalizedMessage(), HttpStatus.EXPECTATION_FAILED);
 	}
 
 }

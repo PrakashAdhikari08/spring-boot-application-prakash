@@ -1,11 +1,11 @@
 package com.example.demo.prakash.dto;
 
+import lombok.Data;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
 
-//@Data
-@Getter
+@Data
 public class AuthorDTO  {
 
 
@@ -19,10 +19,6 @@ public class AuthorDTO  {
 
 	private String userName;
 
-	private String mobile;
-
-	private String add_line_1;
-
-	private String add_line_2;
+	private ContactDTO contactDTO;
 
 }
